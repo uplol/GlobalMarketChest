@@ -210,7 +210,7 @@ public class WorldListener implements Listener {
         return;
       }
 
-      ShopInfo shop = ShopUtils.getShop(event.getClickedBlock());
+      ShopInfo shop = ShopUtils.getShop(block);
 
       if (shop == null)
         return;

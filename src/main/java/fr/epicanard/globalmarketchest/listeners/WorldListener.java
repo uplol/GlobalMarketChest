@@ -125,6 +125,11 @@ public class WorldListener implements Listener {
   public void onPlayerBreakBlock(BlockBreakEvent event) {
     Block block = event.getBlock();
     Player player = event.getPlayer();
+
+    if (!(block.getType() ==  Material.ENDER_CHEST || ShopUtils.isSign(block.getType()))) {
+      return;
+    }
+
     List<BlockFace> attached = Utils.filter(faces, face -> isAttachedTo(block, face));
     if (block.hasMetadata(ShopUtils.META_KEY)) {
       ShopInfo shop = ShopUtils.getShop(block);
@@ -199,6 +204,12 @@ public class WorldListener implements Listener {
     Action action = event.getAction();
 
     if (event.getClickedBlock() != null && action == Action.RIGHT_CLICK_BLOCK) {
+      Block block = event.getClickedBlock();
+
+      if (block.getType() !=  Material.ENDER_CHEST) {
+        return;
+      }
+
       ShopInfo shop = ShopUtils.getShop(event.getClickedBlock());
 
       if (shop == null)
